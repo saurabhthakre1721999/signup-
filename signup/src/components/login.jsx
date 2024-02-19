@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Link, json, useActionData } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
-  const emailOrMobile = useRef();
-  const password = useRef();
-
+  const emailOrMobile = useRef("");
+  const password = useRef("");
+  const navigate = useNavigate("");
   const onSingIUp = (e) => {
     const emailOrMobileValue = emailOrMobile.current.value;
     const passwordValue = password.current.value;
@@ -26,11 +26,13 @@ const Login = () => {
             use.email === emailOrMobileValue && use.password === passwordValue
           );
         });
-        console.log("data", validUser);
+
         if (validUser.length === 0) {
           alert("password incorect");
         } else {
-          alert("correct");
+          localStorage.setItem("loguser", JSON.stringify(validUser));
+
+          navigate("/Home");
         }
       }
     }

@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import { Link, json, useActionData } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const emailOrMobile = useRef();
   const password = useRef();
   const name = useRef();
-
+  const navigate = useNavigate();
   const onSingIUp = (e) => {
     const emailOrMobileValue = emailOrMobile.current.value;
     const passwordValue = password.current.value;
@@ -28,6 +28,7 @@ const Signup = () => {
         name: nameValue,
       };
       localStorage.setItem("users", JSON.stringify([newUser]));
+      navigate("/");
     }
   };
 
